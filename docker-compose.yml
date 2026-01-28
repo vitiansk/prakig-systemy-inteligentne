@@ -7,6 +7,7 @@ services:
       - "8000:8000"
     volumes:
       - ./weights:/app/weights
+      - parking_data:/app/data
     restart: always
 
   frontend:
@@ -18,3 +19,6 @@ services:
     depends_on:
       - backend
     restart: always
+
+volumes:
+  parking_data:

@@ -1,0 +1,18 @@
+# Foldery Dockera i dane
+/images/
+*.log
+
+# Pliki środowiskowe (często zawierają hasła!)
+.env
+
+# Zależności (w zależności od języka)
+node_modules/
+__pycache__/
+venv/
+target/
+
+# Systemowe
+.DS_Store
+Thumbs.db
+*pdf
+*.md

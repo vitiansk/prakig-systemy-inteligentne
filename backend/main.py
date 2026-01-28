@@ -6,8 +6,19 @@ import numpy as np
 from lprnet_arch import LPRNet, CHARS, decode_lpr
 from logic import ParkingSystem
 
+from database import init_db
+
 app = FastAPI()
 DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+
+# Initialize Database
+try:
+    init_db()
+    print("Database initialized.")
+except Exception as e:
+    print(f"Error initializing DB: {e}")
+
+# ... (models loading code omitted but preserved by context since we target surrounding lines)
 
 # Wczytanie modeli (ścieżki dopasowane do Dockera)
 try:
@@ -28,6 +39,16 @@ parking = ParkingSystem()
 @app.get("/")
 def health_check():
     return {"status": "ok", "message": "Parking MVP Backend is running. Go to http://localhost:8501 for the UI."}
+
+@app.post("/manual_open")
+def manual_open():
+    msg = parking.manual_open()
+    return {"status": "ok", "message": msg}
+
+@app.post("/emergency_evacuation")
+def emergency_evacuation():
+    msg = parking.emergency_evacuation()
+    return {"status": "warning", "message": msg}
 
 @app.post("/process_frame")
 async def process_frame(file: UploadFile = File(...), mode: str = "entry"):
