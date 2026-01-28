@@ -1,0 +1,7 @@
+fastapi
+uvicorn[standard]
+python-multipart
+opencv-python-headless
+numpy<2.0.0
+ultralytics
+python-levenshtein
