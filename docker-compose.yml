@@ -6,6 +6,7 @@ services:
     ports:
       - "8000:8000"
     volumes:
+      - ./backend:/app
       - ./weights:/app/weights
       - parking_data:/app/data
     restart: always
@@ -15,6 +16,7 @@ services:
     ports:
       - "8501:8501"
     volumes:
+      - ./frontend:/app
       - ./images:/app/images
     depends_on:
       - backend
